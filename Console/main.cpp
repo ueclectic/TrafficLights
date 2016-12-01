@@ -14,11 +14,10 @@ void sendNotification(string message);
 
 int main() {
 
-	bool isStopped = false;
+	Graphics::hideCursor(true);
 	try {
 		TrafficLights trafficLights(3, 10);
 		future<bool> trafficLightsResponse = async(launch::async, &TrafficLights::initialize, &trafficLights);
-
 
 		while (true)
 		{
@@ -51,7 +50,7 @@ int main() {
 				sendNotification("Incorrect command. Try 'S' to start, 'P' to pause, 'E' to exit");
 			}
 		}
-		isStopped = trafficLightsResponse.get();
+		trafficLightsResponse.get();
 		sendNotification("Stopped");
 	}
 	catch (...) {
