@@ -1,5 +1,6 @@
 #pragma once
-#include<future>
+#include <future>
+#include <string>
 
 #include "Color.h"
 #include "Point.h"
@@ -27,6 +28,7 @@ namespace trafficlights {
 		void stop();
 		void pause();
 		void show();
+		const char* getColor();
 	};
 }
 

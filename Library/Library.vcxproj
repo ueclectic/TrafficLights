@@ -133,12 +133,14 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="TrafficLights.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="TrafficLights.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -4,6 +4,7 @@
 
 #include "Light.h"
 #include "Graphics.h"
+#include "Logger.h"
 
 using namespace std;
 using namespace trafficlights;
@@ -87,7 +88,15 @@ void trafficlights::Light::show()
 	drawLight(false);
 }
 
-
+const char* Light::getColor()
+{
+	switch (color_) {
+	case Color::Red: return "'Red'";
+	case Color::Yellow: return "'Yellow'";
+	case Color::Green: return "'Green'";
+	default: return "'Undefined'";
+	}
+}
 
 bool trafficlights::Light::drawLight(const bool lightColor)
 {

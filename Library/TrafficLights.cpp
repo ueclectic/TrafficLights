@@ -1,5 +1,7 @@
-#include "TrafficLights.h"
 #include <iostream>
+
+#include "TrafficLights.h"
+#include "Logger.h"
 
 using namespace std;
 using namespace trafficlights;
@@ -59,8 +61,10 @@ TrafficLights::~TrafficLights()
 
 bool trafficlights::TrafficLights::initialize()
 {
+	Logger::write("Started");
 	while (true) {
 		if (stopToken_) {
+			Logger::write("Stoped");
 			return false;
 		}
 
@@ -72,10 +76,20 @@ bool trafficlights::TrafficLights::initialize()
 		activeLight_ = lights_.front();
 		lights_.pop();
 		lights_.push(activeLight_);
+
+		string message = "Turn on the light ";
+		message+=activeLight_->getColor();
+
+		Logger::write(message);
 		future<bool> response = async(launch::async, &Light::initialize, activeLight_);
 		response.get();
+
+		message = "Turn off the light ";
+		message += activeLight_->getColor();
+		Logger::write(message);
 	}
 
+	Logger::write("Stopeed");
 	return true;
 }
 
@@ -83,6 +97,8 @@ void TrafficLights::start()
 {
 	stopToken_ = false;
 	pauseToken_ = false;
+
+	Logger::write("Starting...");
 	activeLight_->start();
 }
 
@@ -90,6 +106,8 @@ void TrafficLights::start()
 void TrafficLights::stop()
 {
 	stopToken_ = true;
+
+	Logger::write("Stopping...");
 	activeLight_->stop();
 }
 
@@ -97,7 +115,10 @@ void TrafficLights::stop()
 void TrafficLights::pause()
 {
 	pauseToken_ = true;
+
+	Logger::write("Pause");
 	activeLight_->pause();
+
 }
 
 

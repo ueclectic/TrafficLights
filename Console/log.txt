@@ -1,0 +1,21 @@
+[01-12-2016 23-19-31] Started
+[01-12-2016 23-19-31] Turn on the light 'Red'
+[01-12-2016 23-19-33] Turn off the light 'Red'
+[01-12-2016 23-19-33] Turn on the light 'Yellow'
+[01-12-2016 23-19-37] Pause
+[01-12-2016 23-19-37] Turn off the light 'Yellow'
+[01-12-2016 23-19-41] Starting...
+[01-12-2016 23-19-41] Turn on the light 'Green'
+[01-12-2016 23-19-44] Turn off the light 'Green'
+[01-12-2016 23-19-44] Turn on the light 'Red'
+[01-12-2016 23-19-47] Turn off the light 'Red'
+[01-12-2016 23-19-47] Turn on the light 'Yellow'
+[01-12-2016 23-19-47] Pause
+[01-12-2016 23-19-49] Starting...
+[01-12-2016 23-19-50] Pause
+[01-12-2016 23-19-52] Starting...
+[01-12-2016 23-19-55] Turn off the light 'Yellow'
+[01-12-2016 23-19-55] Turn on the light 'Green'
+[01-12-2016 23-19-56] Stopping...
+[01-12-2016 23-19-57] Turn off the light 'Green'
+[01-12-2016 23-19-57] Stop working
