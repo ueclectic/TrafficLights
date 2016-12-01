@@ -31,19 +31,19 @@ void trafficlights::TrafficLights::buildTrafficLight()
 
 
 
-	activeLight_= new Light(Color::Red, 2, lightRadius_, Point(x, y));
+	activeLight_= new Light(Color::Red, 2,false, lightRadius_, Point(x, y));
 	activeLight_->show();
 	lights_.push(activeLight_);
 
 	if (nLights_ == 3) {
 		x += x;
-		activeLight_ = new Light(Color::Yellow, 4, lightRadius_, Point(x, y));
+		activeLight_ = new Light(Color::Yellow, 4, true, lightRadius_, Point(x, y));
 		activeLight_->show();
 		lights_.push(activeLight_);
 	}
 
 	x += lightRadius_ + leftMargin;
-	activeLight_ = new Light(Color::Green, 3, lightRadius_, Point(x, y));
+	activeLight_ = new Light(Color::Green, 3, false, lightRadius_, Point(x, y));
 	activeLight_->show();
 	lights_.push(activeLight_);
 }

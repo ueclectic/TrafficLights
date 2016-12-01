@@ -9,6 +9,8 @@ namespace trafficlights {
 	{
 		const Color color_;
 		const int duration_;
+		const bool isBlinking_;
+		bool isBlinked_;
 		const int radius_;
 		const Point center_;
 		std::atomic_bool stopToken_;
@@ -18,7 +20,7 @@ namespace trafficlights {
 		void turnOnLight();
 		void turnOffLight();
 	public:
-		Light(Color color, const int duration, const int radius, const Point center);
+		Light(Color color, const int duration, const bool isBlinking, const int radius, const Point center);
 		~Light();
 		bool start();
 		void stop();

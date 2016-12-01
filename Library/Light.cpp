@@ -9,9 +9,11 @@ using namespace std;
 using namespace trafficlights;
 
 
-Light::Light(Color color, const int duration, const int radius, const Point center) :
+Light::Light(Color color, const int duration, const bool isBlinking, const int radius, const Point center) :
 	color_(color),
 	duration_(duration),
+	isBlinking_(isBlinking),
+	isBlinked_(false),
 	radius_(radius),
 	center_(center),
 	stopToken_(false),
@@ -28,7 +30,7 @@ Light::~Light()
 bool Light::start()
 {
 	turnOnLight();
-	const int delay = 200;
+	const int delay = 100;
 	for (int i = duration_*1000; i >0; i-=delay) {
 		if (stopToken_) {
 			return false;
@@ -38,6 +40,15 @@ bool Light::start()
 			while (pauseToken_);//wait
 		}
 
+		if (isBlinking_ && i%1000==0) {
+			if (isBlinked_) {
+				turnOffLight();
+			}
+			else {
+				turnOnLight();
+			}
+			isBlinked_ = !isBlinked_;
+		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(delay));
 	}
 
