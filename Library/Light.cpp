@@ -1,8 +1,21 @@
+#pragma once
+#include <iostream>
+#include <string>
+
 #include "Light.h"
+#include "Graphics.h"
+
+using namespace std;
+using namespace trafficlights;
 
 
-
-Light::Light()
+Light::Light(Color color, const int duration, const int radius, const Point center) :
+	color_(color),
+	duration_(duration),
+	radius_(radius),
+	center_(center),
+	stopToken_(false),
+	pauseToken_(false)
 {
 }
 
@@ -10,3 +23,72 @@ Light::Light()
 Light::~Light()
 {
 }
+
+
+bool Light::Start()
+{
+	turnOnLight();
+	const int delay = 200;
+	for (int i = duration_*1000; i >0; i-=delay) {
+		if (stopToken_) {
+			return false;
+		}
+
+		if (pauseToken_) {
+			while (pauseToken_);//wait
+		}
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(delay));
+	}
+
+	turnOffLight();
+
+	return true;
+}
+
+
+void Light::Stop()
+{
+	turnOffLight();
+	stopToken_ = true;
+}
+
+
+void Light::Pause()
+{
+	pauseToken_ = true;
+}
+
+
+
+bool trafficlights::Light::drawLight(const bool lightColor)
+{
+	int color;
+	if (lightColor) {
+		color = Graphics::getLightColor(color_);
+		if (color == -1) {
+			return false;
+		}
+	}
+	else {
+		color = static_cast<int>(color_);
+	}
+
+	return Graphics::drawCircle(center_, radius_, color);
+}
+
+
+void trafficlights::Light::turnOnLight()
+{
+	drawLight(true);
+}
+
+
+
+void trafficlights::Light::turnOffLight()
+{
+	drawLight(false);
+}
+
+
+
