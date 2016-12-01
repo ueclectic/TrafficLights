@@ -8,7 +8,8 @@ using namespace trafficlights;
 TrafficLights::TrafficLights(const int lightsNumber, const int lightRadius) :
 	nLights_(lightsNumber),
 	lightRadius_(lightRadius),
-	stopToken_(false)
+	stopToken_(false),
+	pauseToken_(false)
 {
 	if (lightsNumber > 3 || lightsNumber < 2) {
 		throw exception("Incorrect number of lights");
@@ -63,6 +64,11 @@ bool trafficlights::TrafficLights::initialize()
 			return false;
 		}
 
+		if (pauseToken_) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(500));
+			continue;
+		}
+
 		activeLight_ = lights_.front();
 		lights_.pop();
 		lights_.push(activeLight_);
@@ -76,6 +82,7 @@ bool trafficlights::TrafficLights::initialize()
 void TrafficLights::start()
 {
 	stopToken_ = false;
+	pauseToken_ = false;
 	activeLight_->start();
 }
 
@@ -89,6 +96,7 @@ void TrafficLights::stop()
 
 void TrafficLights::pause()
 {
+	pauseToken_ = true;
 	activeLight_->pause();
 }
 
