@@ -80,13 +80,9 @@ bool trafficlights::Graphics::drawCircle(const Point center, const int radius, c
 				setColor(static_cast<int>(color));
 				std::cout << "0";
 			}
-			/*else {
-				setColor(0x07);
-				std::cout << 0;
-			}*/
 		}
 	}
-
+	gotoXY(0, 0);
 
 	return true;
 }
