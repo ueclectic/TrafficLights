@@ -20,9 +20,10 @@ namespace trafficlights {
 	public:
 		Light(Color color, const int duration, const int radius, const Point center);
 		~Light();
-		bool Start();
-		void Stop();
-		void Pause();
+		bool start();
+		void stop();
+		void pause();
+		void show();
 	};
 }
 

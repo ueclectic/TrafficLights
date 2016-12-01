@@ -25,7 +25,7 @@ Light::~Light()
 }
 
 
-bool Light::Start()
+bool Light::start()
 {
 	turnOnLight();
 	const int delay = 200;
@@ -47,16 +47,21 @@ bool Light::Start()
 }
 
 
-void Light::Stop()
+void Light::stop()
 {
 	turnOffLight();
 	stopToken_ = true;
 }
 
 
-void Light::Pause()
+void Light::pause()
 {
 	pauseToken_ = true;
+}
+
+void trafficlights::Light::show()
+{
+	drawLight(false);
 }
 
 
