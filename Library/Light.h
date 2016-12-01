@@ -22,7 +22,8 @@ namespace trafficlights {
 	public:
 		Light(Color color, const int duration, const bool isBlinking, const int radius, const Point center);
 		~Light();
-		bool start();
+		bool initialize();
+		void start();
 		void stop();
 		void pause();
 		void show();

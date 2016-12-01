@@ -26,21 +26,24 @@ Light::~Light()
 {
 }
 
-
-bool Light::start()
+bool trafficlights::Light::initialize()
 {
 	turnOnLight();
-	const int delay = 100;
-	for (int i = duration_*1000; i >0; i-=delay) {
+	const int delay = 1000;
+	for (int i = duration_ * 1000; i > 0;) {
 		if (stopToken_) {
 			return false;
 		}
 
-		if (pauseToken_) {
-			while (pauseToken_);//wait
+		if (!pauseToken_) {
+			i -= delay;
+		}
+		else {
+			std::this_thread::sleep_for(std::chrono::milliseconds(delay));
+			continue;
 		}
 
-		if (isBlinking_ && i%1000==0) {
+		if (isBlinking_ && i % 1000 == 0) {
 			if (isBlinked_) {
 				turnOffLight();
 			}
@@ -50,11 +53,20 @@ bool Light::start()
 			isBlinked_ = !isBlinked_;
 		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(delay));
+
 	}
 
 	turnOffLight();
 
 	return true;
+}
+
+
+
+void Light::start()
+{
+	stopToken_ = false;
+	pauseToken_ = false;
 }
 
 
@@ -103,6 +115,8 @@ void trafficlights::Light::turnOnLight()
 
 void trafficlights::Light::turnOffLight()
 {
+	pauseToken_ = false;
+	stopToken_ = false;
 	drawLight(false);
 }
 

@@ -10,17 +10,17 @@ namespace trafficlights {
 		std::queue<Light*> lights_;
 		Light* activeLight_;
 		std::atomic_bool stopToken_;
-		std::atomic_bool pauseToken_;
 		const int lightRadius_;		
 		const int nLights_;
 		const int maxLightRadius_ = 12;
 
-		void buildTrafficLight();
+		void buildTrafficLights();
 	public:
 		TrafficLights(const int lightsNumber,  const int lightRadius);
 		~TrafficLights();
 
-		bool start();
+		bool initialize();
+		void start();
 		void stop();
 		void pause();
 	};
